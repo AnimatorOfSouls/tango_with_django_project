@@ -2,7 +2,9 @@ from django.contrib import admin
 from rango.models import Category, Page     #add name of model when adding new model
 
 #add new register when adding new model
-admin.site.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug':('name',)}
+admin.site.register(Category, CategoryAdmin)
 
 class PageAdmin(admin.ModelAdmin):
     list_display = ("title","category","url")
